@@ -5,6 +5,7 @@ import sys
 
 import lxml.html as html
 import requests
+from pprint import pprint
 
 
 # Print iterations progress
@@ -65,12 +66,8 @@ def get_board_info(board_name):
     tag = root.xpath("//script[@id='initial-state']")[0]
     initial_data = json.loads(tag.text)
 
-    boards = initial_data['resources'] \
-        ['data'] \
-        ['BoardPageResource']
-
-    boards = boards[list(boards.keys())[0]] \
-        ['data']
+    boards = initial_data['resourceResponses'] [0]
+    boards = boards[list(boards.keys())[2]] ['data']
 
     return [boards]
 
